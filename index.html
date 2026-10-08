@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContactHub</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md bg-white border-bottom py-3 shadow-sm mb-4">
+        <div class="container px-3 px-md-4">
+            
+            <a class="navbar-brand d-flex align-items-center m-0" href="#">
+                <span class="d-inline-flex align-items-center justify-content-center text-white rounded-12 bg-purple me-2" style="width: 40px; height: 40px;">
+                    <i class="fa-solid fa-address-book fs-5"></i>
+                </span>
+                <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-0 fw-bold text-dark fs-5">Contact<span class="text-purple">Hub</span></h4>
+                    <small class="text-secondary" style="font-size: 11px;">Smart Contact Manager</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars fs-4 text-purple"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse mt-3 mt-md-0" id="navbarContent">
+                <div class="d-flex align-items-center gap-3 ms-auto flex-wrap pt-2 pt-md-0 border-top border-md-0">
+                    <button class="btn btn-purple px-3 py-2 rounded-12 fw-semibold btn-sm d-flex align-items-center gap-2 w-100 w-sm-auto justify-content-center" onclick="openAddModal()">
+                        <i class="fa-solid fa-plus"></i> Add Contact
+                    </button>
+                    <div class="d-flex align-items-center gap-3 ms-auto ms-md-0">
+                        <a href="#" class="text-secondary"><i class="fa-regular fa-bell fs-5"></i></a>
+                        <a href="#" class="text-secondary"><i class="fa-solid fa-gear fs-5"></i></a>
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="rounded-circle border" alt="Profile" style="width: 36px; height: 36px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </nav>
+
+    <div class="container px-3 px-md-4">
+        
+        <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card p-3 border-0 rounded-16 shadow-sm d-flex flex-row align-items-center gap-3 bg-white h-100">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-12 flex-shrink-0" style="width: 48px; height: 48px; background-color: #e0e7ff; color: #4f46e5;">
+                        <i class="fa-solid fa-users fs-5"></i>
+                    </div>
+                    <div>
+                        <small class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;">Total</small>
+                        <h3 class="mb-0 fw-bold text-dark" id="totalCount">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card p-3 border-0 rounded-16 shadow-sm d-flex flex-row align-items-center gap-3 bg-white h-100">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-12 flex-shrink-0" style="width: 48px; height: 48px; background-color: #ffedd5; color: #ea580c;">
+                        <i class="fa-solid fa-star fs-5"></i>
+                    </div>
+                    <div>
+                        <small class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;">Favorites</small>
+                        <h3 class="mb-0 fw-bold text-dark" id="favCount">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card p-3 border-0 rounded-16 shadow-sm d-flex flex-row align-items-center gap-3 bg-white h-100">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-12 flex-shrink-0" style="width: 48px; height: 48px; background-color: #fee2e2; color: #dc2626;">
+                        <i class="fa-solid fa-heart fs-5"></i>
+                    </div>
+                    <div>
+                        <small class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;">Emergency</small>
+                        <h3 class="mb-0 fw-bold text-dark" id="emergencyCount">0</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            <div class="col-12 col-lg-8">
+                <div class="mb-3">
+                    <h4 class="fw-bold text-dark mb-1 fs-4">All Contacts</h4>
+                    <p class="text-secondary small" id="contactsSubtitle">Manage and organize your 0 contacts</p>
+                </div>
+
+                <div class="input-group mb-4 shadow-sm rounded-12 overflow-hidden bg-white">
+                    <span class="input-group-text bg-white border-0 ps-3 text-muted">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchInput" class="form-control search-input border-0 py-2 text-secondary fs-6" placeholder="Search by name, phone, or email..." oninput="searchContacts()">
+                </div>
+
+                <div id="contactsContainer" class="row g-3"></div>
+            </div>
+
+            <div class="col-12 col-lg-4 d-flex flex-column gap-3">
+                
+                <!-- Favorites Card -->
+                <div class="card border-0 rounded-16 p-3 shadow-sm bg-white">
+                    <div class="d-flex align-items-start gap-2 mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-light rounded-3 flex-shrink-0" style="color: #ea580c; width:32px; height:32px;">
+                            <i class="fa-solid fa-star small"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-0 text-dark small">Favorites</h6>
+                            <small class="text-secondary" style="font-size: 11px;">Quick access to starred contacts</small>
+                        </div>
+                    </div>
+                    <div id="favoritesList" class="d-flex flex-column gap-2"></div>
+                </div>
+
+                <!-- Emergency Card -->
+                <div class="card border-0 rounded-16 p-3 shadow-sm bg-white">
+                    <div class="d-flex align-items-start gap-2 mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-light rounded-3 text-danger flex-shrink-0" style="width:32px; height:32px;">
+                            <i class="fa-solid fa-heart small"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-0 text-dark small">Emergency</h6>
+                            <small class="text-secondary" style="font-size: 11px;">Important contacts for urgent calls</small>
+                        </div>
+                    </div>
+                    <div id="emergencyList" class="d-flex flex-column gap-2"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered px-3">
+            <div class="modal-content border-0 rounded-16 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Add New Contact</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-3 p-md-4">
+                    <form id="contactForm" novalidate>
+                        <input type="hidden" id="contactIndex">
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Name</label>
+                            <input type="text" class="form-control rounded-12" id="contactName" placeholder="John Doe">
+                            <div class="invalid-feedback">Name must be at least 2 characters.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Phone Number</label>
+                            <input type="tel" class="form-control rounded-12" id="contactPhone" placeholder="01012345678">
+                            <div class="invalid-feedback">Enter a valid phone number (11 digits starting with 01).</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Email Address</label>
+                            <input type="email" class="form-control rounded-12" id="contactEmail" placeholder="john@example.com">
+                            <div class="invalid-feedback">Enter a valid email address.</div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="isFavorite">
+                                    <label class="form-check-label small" for="isFavorite">Favorite</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="isEmergency">
+                                    <label class="form-check-label small" for="isEmergency">Emergency</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-light rounded-12 px-4" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-purple rounded-12 px-4" onclick="saveContact()">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>

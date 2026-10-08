@@ -1,0 +1,105 @@
+body { 
+    background-color: #f8f9fa !important; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #334155;
+    overflow-x: hidden;
+}
+
+.bg-purple { 
+    background-color: #6366f1 !important; 
+}
+
+.text-purple { 
+    color: #6366f1 !important; 
+}
+
+.btn-purple { 
+    background-color: #6366f1 !important; 
+    color: white !important; 
+    border: none !important; 
+    transition: all 0.2s ease-in-out !important;
+}
+
+.btn-purple:hover { 
+    background-color: #4f46e5 !important; 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+.rounded-16 { 
+    border-radius: 16px !important; 
+}
+
+.rounded-12 { 
+    border-radius: 12px !important; 
+}
+
+.card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+.search-input {
+    transition: all 0.2s ease;
+}
+
+.search-input:focus {
+    box-shadow: none !important;
+    background-color: #fff !important;
+}
+
+.input-group {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.input-group:focus-within {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15) !important;
+}
+
+.btn-circle-action {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-circle-action:hover {
+    transform: scale(1.1);
+}
+
+.sidebar-item {
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.sidebar-item:hover {
+    background-color: #eef2ff !important;
+}
+
+.form-control:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+.form-check-input:checked {
+    background-color: #6366f1 !important;
+    border-color: #6366f1 !important;
+}
+
+@media (max-width: 576px) {
+    .w-sm-auto {
+        width: auto !important;
+    }
+    
+    .card {
+        padding: 12px !important;
+    }
+}
